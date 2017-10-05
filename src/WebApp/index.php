@@ -16,6 +16,10 @@
     <link href="css/jQuery.AudioPlayer.css" rel="stylesheet">
 
     <style type="text/css">
+        body {
+            background: url('images/tile.jpg') repeat;
+            color: #fff;
+        }
 
     </style>
 
