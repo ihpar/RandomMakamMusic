@@ -116,7 +116,7 @@
                     <div id="dvSongHolder" style="height: 5px;">
                         <div id="dvLoader" style="display: none;">
                             <div style="background-color:#24888c; color:#fff; font-size:24px; border-radius:6px; padding:0px 16px; line-height:46px;">
-                                COMP<img src="images/loading.gif"/>SING...
+                                COMPOSING...
                             </div>
                         </div>
 
