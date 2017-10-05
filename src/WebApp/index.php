@@ -8,19 +8,99 @@
     <meta name="author" content="ismail hakkı parlak, cem kösemen">
     <link rel="icon" href="images/favicon.png">
 
-    <title>Turca | A true random music generator for Turkish Makams</title>
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/jQuery.AudioPlayer.js"></script>
-
-    <link href="css/jQuery.AudioPlayer.css" rel="stylesheet">
+    <title>Turca</title>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
 
     <style type="text/css">
-        body {
-            background: url('images/tile.jpg') repeat;
-            color: #fff;
+        html, body {
+            padding: 0;
+            margin: 0;
         }
 
+        body {
+            min-height: 100vh;
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            font-weight: normal;
+            background: url('images/tile.jpg') repeat;
+            color: #817855;
+        }
+
+        .container {
+            padding: 16px;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            padding: 0;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .styled-input-single {
+            position: relative;
+            padding: 0.3em 0 0.3em 1.8em;
+            text-align: left;
+        }
+
+        .styled-input-single label {
+            cursor: pointer;
+        }
+
+        .styled-input-single label:before, .styled-input-single label:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            border-radius: 50%;
+        }
+
+        .styled-input-single label:before {
+            left: 0;
+            width: 1.4em;
+            height: 1.4em;
+            margin: -0.7em 0 0;
+            background: #82929f;
+        }
+
+        .styled-input-single label:after {
+            left: 0.2em;
+            width: 1em;
+            height: 1em;
+            margin: -0.5em 0 0;
+            opacity: 0;
+            background: #05182E;
+            transform: translate3d(-60px, 0, 0) scale(0.1);
+            transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+        }
+
+        .styled-input-single input[type="radio"],
+        .styled-input-single input[type="checkbox"] {
+            position: absolute;
+            top: 0;
+            left: -9999px;
+            visibility: hidden;
+        }
+
+        .styled-input-single input[type="radio"]:checked + label:after,
+        .styled-input-single input[type="checkbox"]:checked + label:after {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+
+        .opts {
+            margin-top: 0.5em;
+        }
+
+        div.inline {
+            display: inline-block;
+            margin-right: 1em;
+        }
+
+        .row {
+            margin-bottom: 1em;
+        }
     </style>
 
 </head>
@@ -30,117 +110,111 @@
 <!-- Page Content -->
 <div class="container">
 
-    <!-- Projects Row -->
     <div class="row">
-        <div class="col-md-12 portfolio-item">
-            <form>
-                <div class="form-group">
+        <h3>Makam</h3>
+        <div class="opts">
+            <div class="styled-input-single inline">
+                <input type="radio" name="optionsM" id="btnHicaz" checked>
+                <label for="btnHicaz">Hicaz</label>
+            </div>
+            <div class="styled-input-single inline">
+                <input type="radio" name="optionsM" id="btnUssak">
+                <label for="btnUssak">Uşşak</label>
+            </div>
+        </div>
+    </div>
 
-                    <h3>Makam</h3>
-                    <div class="btn-group btn-group-justified" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="optionsM" id="btnUssak" autocomplete="off" checked> Uşşak
-                        </label>
-                        <label class="btn btn-info ">
-                            <input type="radio" name="optionsM" id="btnHicaz" autocomplete="off"> Hicaz
-                        </label>
-                    </div>
+    <div class="row">
+        <h3>Instruments</h3>
+        <div class="opts">
+            <div class="styled-input-single inline">
+                <input type="checkbox" id="btnUd" checked>
+                <label for="btnUd">Ud</label>
+            </div>
+            <div class="styled-input-single inline">
+                <input type="checkbox" id="btnKanun" checked>
+                <label for="btnKanun">Kanun</label>
+            </div>
+            <div class="styled-input-single inline">
+                <input type="checkbox" id="btnTanbur" checked>
+                <label for="btnTanbur">Tanbur</label>
+            </div>
+            <div class="styled-input-single inline">
+                <input type="checkbox" id="btnNey" checked>
+                <label for="btnNey">Ney</label>
+            </div>
+        </div>
+    </div>
 
-                </div>
+    <div class="row">
+        <h3>Tempo</h3>
+        <div class="opts">
+            <div class="styled-input-single inline">
+                <input type="radio" name="optionsT" id="btn80" checked>
+                <label for="btn80">80</label>
+            </div>
+            <div class="styled-input-single inline">
+                <input type="radio" name="optionsT" id="btn100">
+                <label for="btn100">100</label>
+            </div>
+            <div class="styled-input-single inline">
+                <input type="radio" name="optionsT" id="btn120">
+                <label for="btn120">120</label>
+            </div>
+        </div>
+    </div>
 
-                <div class="form-group">
+    <div>
 
-                    <h3>Instruments</h3>
-                    <div class="btn-group btn-group-justified" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="checkbox" id="btnUd" autocomplete="off" checked> Ud
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="checkbox" id="btnKanun" autocomplete="off"> Kanun
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="checkbox" id="btnTanbur" autocomplete="off"> Tanbur
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="checkbox" id="btnNey" autocomplete="off"> Ney
-                        </label>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <h3>Tempo</h3>
-                    <div class="btn-group btn-group-justified" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="radio" name="optionsT" id="btn80" autocomplete="off" checked> 80
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="optionsT" id="btn100" autocomplete="off"> 100
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="radio" name="optionsT" id="btn120" autocomplete="off"> 120
-                        </label>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <h3>Percussion</h3>
-                    <div class="btn-group btn-group-justified" data-toggle="buttons">
-                        <label class="btn btn-info active">
-                            <input type="checkbox" id="btnBendir" autocomplete="off" checked> Bendir
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="checkbox" id="btnErbane" autocomplete="off"> Erbane
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="checkbox" id="btnKudum" autocomplete="off"> Kudüm
-                        </label>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <h3>Musicality <span id="spnMusicality">(5)</span></h3>
-                    <div class="btn-group btn-group-justified" data-toggle="buttons">
-                        <input id="musicality" data-slider-id="musicalitySlider" type="text" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="5"
-                               data-slider-tooltip="hide"/>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <div id="dvSongHolder" style="height: 5px;">
-                        <div id="dvLoader" style="display: none;">
-                            <div style="background-color:#24888c; color:#fff; font-size:24px; border-radius:6px; padding:0px 16px; line-height:46px;">
-                                COMPOSING...
-                            </div>
-                        </div>
-
-                        <div id="dvGeneratedSong" style="display: none;">
-                            <h3 style="margin-top: 0px;">Generated Song</h3>
-                            <div id="audioWrap"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <button type="button" id="btnGenerateMusic" class="btn btn-success btn-lg btn-block">Generate Music</button>
-                </div>
-
-            </form>
+        <h3>Percussion</h3>
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+            <label class="btn btn-info active">
+                <input type="checkbox" id="btnBendir" autocomplete="off" checked> Bendir
+            </label>
+            <label class="btn btn-info">
+                <input type="checkbox" id="btnErbane" autocomplete="off"> Erbane
+            </label>
+            <label class="btn btn-info">
+                <input type="checkbox" id="btnKudum" autocomplete="off"> Kudüm
+            </label>
         </div>
 
     </div>
-    <!-- /.row -->
+
+    <div>
+
+        <h3>Musicality <span id="spnMusicality">(5)</span></h3>
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+            <input id="musicality">
+        </div>
+
+    </div>
+
+    <div>
+        <div id="dvSongHolder" style="height: 5px;">
+            <div id="dvLoader" style="display: none;">
+                <div style="background-color:#24888c; color:#fff; font-size:24px; border-radius:6px; padding:0px 16px; line-height:46px;">
+                    COMPOSING...
+                </div>
+            </div>
+
+            <div id="dvGeneratedSong" style="display: none;">
+                <h3 style="margin-top: 0px;">Generated Song</h3>
+                <div id="audioWrap"></div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <button type="button" id="btnGenerateMusic" class="btn btn-success btn-lg btn-block">Generate Music</button>
+    </div>
 
 </div>
-<!-- /.container -->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
+    /*
     var gotAudio = false;
     var player = null;
     var canGenerateSong = true;
@@ -264,7 +338,7 @@
         });
 
     });
-
+*/
 </script>
 </body>
 
