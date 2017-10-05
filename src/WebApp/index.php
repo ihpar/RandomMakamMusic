@@ -15,6 +15,7 @@
         html, body {
             padding: 0;
             margin: 0;
+            background-color: #181B21;
         }
 
         body {
@@ -22,8 +23,7 @@
             font-family: 'Oswald', sans-serif;
             font-size: 24px;
             font-weight: normal;
-            background: url('images/tile.jpg') repeat;
-            color: #817855;
+            color: #d6c372;
         }
 
         .container {
@@ -39,58 +39,60 @@
             font-weight: normal;
         }
 
-        .styled-input-single {
+        .mo-btn {
             position: relative;
             padding: 0.3em 0 0.3em 1.8em;
             text-align: left;
         }
 
-        .styled-input-single label {
+        .mo-btn label {
             cursor: pointer;
         }
 
-        .styled-input-single label:before, .styled-input-single label:after {
+        .mo-btn label:before, .mo-btn label:after {
             content: '';
             position: absolute;
             top: 50%;
             border-radius: 50%;
         }
 
-        .styled-input-single label:before {
+        .mo-btn label:before {
             left: 0;
             width: 1.4em;
             height: 1.4em;
             margin: -0.7em 0 0;
-            background: #82929f;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-sizing: border-box;
         }
 
-        .styled-input-single label:after {
+        .mo-btn label:after {
             left: 0.2em;
             width: 1em;
             height: 1em;
             margin: -0.5em 0 0;
             opacity: 0;
-            background: #05182E;
+            background: #8C7853;
             transform: translate3d(-60px, 0, 0) scale(0.1);
             transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
         }
 
-        .styled-input-single input[type="radio"],
-        .styled-input-single input[type="checkbox"] {
+        .mo-btn input[type="radio"],
+        .mo-btn input[type="checkbox"] {
             position: absolute;
             top: 0;
             left: -9999px;
             visibility: hidden;
         }
 
-        .styled-input-single input[type="radio"]:checked + label:after,
-        .styled-input-single input[type="checkbox"]:checked + label:after {
+        .mo-btn input[type="radio"]:checked + label:after,
+        .mo-btn input[type="checkbox"]:checked + label:after {
             transform: translate3d(0, 0, 0);
             opacity: 1;
         }
 
         .opts {
-            margin-top: 0.5em;
+            margin-top: 0.2em;
         }
 
         div.inline {
@@ -99,7 +101,7 @@
         }
 
         .row {
-            margin-bottom: 1em;
+            padding: 0.75em 0;
         }
     </style>
 
@@ -113,11 +115,11 @@
     <div class="row">
         <h3>Makam</h3>
         <div class="opts">
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="radio" name="optionsM" id="btnHicaz" checked>
                 <label for="btnHicaz">Hicaz</label>
             </div>
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="radio" name="optionsM" id="btnUssak">
                 <label for="btnUssak">Uşşak</label>
             </div>
@@ -125,21 +127,21 @@
     </div>
 
     <div class="row">
-        <h3>Instruments</h3>
+        <h3>Orkestra</h3>
         <div class="opts">
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="checkbox" id="btnUd" checked>
                 <label for="btnUd">Ud</label>
             </div>
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="checkbox" id="btnKanun" checked>
                 <label for="btnKanun">Kanun</label>
             </div>
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="checkbox" id="btnTanbur" checked>
                 <label for="btnTanbur">Tanbur</label>
             </div>
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="checkbox" id="btnNey" checked>
                 <label for="btnNey">Ney</label>
             </div>
@@ -149,64 +151,61 @@
     <div class="row">
         <h3>Tempo</h3>
         <div class="opts">
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="radio" name="optionsT" id="btn80" checked>
                 <label for="btn80">80</label>
             </div>
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="radio" name="optionsT" id="btn100">
                 <label for="btn100">100</label>
             </div>
-            <div class="styled-input-single inline">
+            <div class="mo-btn inline">
                 <input type="radio" name="optionsT" id="btn120">
                 <label for="btn120">120</label>
             </div>
         </div>
     </div>
 
-    <div>
-
-        <h3>Percussion</h3>
-        <div class="btn-group btn-group-justified" data-toggle="buttons">
-            <label class="btn btn-info active">
-                <input type="checkbox" id="btnBendir" autocomplete="off" checked> Bendir
-            </label>
-            <label class="btn btn-info">
-                <input type="checkbox" id="btnErbane" autocomplete="off"> Erbane
-            </label>
-            <label class="btn btn-info">
-                <input type="checkbox" id="btnKudum" autocomplete="off"> Kudüm
-            </label>
+    <div class="row">
+        <h3>Perküsyon</h3>
+        <div class="opts">
+            <div class="mo-btn inline">
+                <input type="checkbox" id="btnBendir" checked>
+                <label for="btnBendir">Bendir</label>
+            </div>
+            <div class="mo-btn inline">
+                <input type="checkbox" id="btnErbane" checked>
+                <label for="btnErbane">Erbane</label>
+            </div>
+            <div class="mo-btn inline">
+                <input type="checkbox" id="btnKudum" checked>
+                <label for="btnKudum">Kudüm</label>
+            </div>
         </div>
-
     </div>
 
-    <div>
-
-        <h3>Musicality <span id="spnMusicality">(5)</span></h3>
-        <div class="btn-group btn-group-justified" data-toggle="buttons">
+    <div class="row">
+        <h3>Müzikalite <span id="spnMusicality">(5)</span></h3>
+        <div class="opts">
             <input id="musicality">
         </div>
-
     </div>
 
-    <div>
-        <div id="dvSongHolder" style="height: 5px;">
-            <div id="dvLoader" style="display: none;">
-                <div style="background-color:#24888c; color:#fff; font-size:24px; border-radius:6px; padding:0px 16px; line-height:46px;">
-                    COMPOSING...
-                </div>
+    <div class="row" id="dvSongHolder" style="height: 5px; display: none;">
+        <div id="dvLoader" style="display: none;">
+            <div style="background-color:#24888c; color:#fff; font-size:24px; border-radius:6px; padding:0px 16px; line-height:46px;">
+                COMPOSING...
             </div>
+        </div>
 
-            <div id="dvGeneratedSong" style="display: none;">
-                <h3 style="margin-top: 0px;">Generated Song</h3>
-                <div id="audioWrap"></div>
-            </div>
+        <div id="dvGeneratedSong" style="display: none;">
+            <h3 style="margin-top: 0px;">Generated Song</h3>
+            <div id="audioWrap"></div>
         </div>
     </div>
 
-    <div>
-        <button type="button" id="btnGenerateMusic" class="btn btn-success btn-lg btn-block">Generate Music</button>
+    <div class="row">
+        <button type="button" id="btnGenerateMusic" class="btn">Bestele</button>
     </div>
 
 </div>
