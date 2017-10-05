@@ -11,77 +11,11 @@
     <title>Turca | A true random music generator for Turkish Makams</title>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/bootstrap-slider.js"></script>
     <script type="text/javascript" src="js/jQuery.AudioPlayer.js"></script>
 
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-slider.css" rel="stylesheet">
     <link href="css/jQuery.AudioPlayer.css" rel="stylesheet">
 
     <style type="text/css">
-
-        body {
-            background-size: cover;
-            background: url('images/ottoman.jpg') fixed;
-        }
-
-        h3 {
-            color: #fff;
-            font-size: 18px;
-        }
-
-        .slider.slider-horizontal {
-            width: 100%;
-            height: 20px;
-        }
-
-        .focus {
-            background-color: #4fd2d6;
-            border-color: #42b1b5;
-        }
-
-        .btn-info.active, .btn-info:active, .open > .dropdown-toggle.btn-info {
-            color: #fff;
-            background-color: #24888c;
-            border-color: #1f7477;
-            outline: none;
-        }
-
-        .btn-info:active:hover,
-        .btn-info.active:hover,
-        .open > .dropdown-toggle.btn-info:hover,
-        .btn-info:active:focus,
-        .btn-info.active:focus,
-        .open > .dropdown-toggle.btn-info:focus,
-        .btn-info:active.focus,
-        .btn-info.active.focus,
-        .open > .dropdown-toggle.btn-info.focus {
-            color: #fff;
-            background-color: #24888c;
-            border-color: #1f7477;
-            outline: none !important;
-        }
-
-        .btn-info:hover {
-            color: #fff;
-            background-color: #4fd2d6;
-            border-color: #42b1b5;
-        }
-
-        .btn-info {
-            color: #fff;
-            background-color: #4fd2d6;
-            border-color: #42b1b5;
-        }
-
-        *:focus {
-            outline: none !important;
-        }
-
-        .btn {
-            outline: none !important;
-        }
 
     </style>
 
