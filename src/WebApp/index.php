@@ -10,12 +10,14 @@
 
     <title>Rastgele!</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
 
     <style type="text/css">
         html, body {
             padding: 0;
             margin: 0;
             background-color: #26292C;
+            overflow-x: hidden;
         }
 
         body {
@@ -162,7 +164,6 @@
             width: 35px;
             height: 35px;
             position: absolute;
-            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…Igd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g);
             background-size: 100%;
             background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
             background-image: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
@@ -172,6 +173,10 @@
             border-radius: 50%;
             top: -12.5px;
             touch-action: pan-y;
+        }
+
+        .song-builder, .song-player {
+            animation-duration: 0.3s;
         }
 
         @media only screen and (max-width: 510px) {
@@ -206,102 +211,134 @@
 
 <!-- Page Content -->
 <div class="container">
-
-    <div class="row">
-        <h3>Makam</h3>
-        <div class="opts">
-            <div class="mo-btn inline">
-                <input type="radio" name="optionsM" id="btnHicaz" class="makam" data-value="Hicaz" checked>
-                <label for="btnHicaz">Hicaz</label>
-            </div>
-            <div class="mo-btn inline">
-                <input type="radio" name="optionsM" id="btnUssak" class="makam" data-value="Uşşak">
-                <label for="btnUssak">Uşşak</label>
-            </div>
-            <div class="mo-btn inline" style="height: 0;"></div>
-            <div class="mo-btn inline" style="height: 0;"></div>
-        </div>
-    </div>
-
-    <div class="row">
-        <h3>Orkestra</h3>
-        <div class="opts">
-            <div class="mo-btn inline">
-                <input type="checkbox" id="btnUd" class="instrument" data-value="Ud" checked>
-                <label for="btnUd">Ud</label>
-            </div>
-            <div class="mo-btn inline">
-                <input type="checkbox" id="btnKanun" class="instrument" data-value="Kanun" checked>
-                <label for="btnKanun">Kanun</label>
-            </div>
-            <div class="mo-btn inline">
-                <input type="checkbox" id="btnTanbur" class="instrument" data-value="Tanbur" checked>
-                <label for="btnTanbur">Tanbur</label>
-            </div>
-            <div class="mo-btn inline">
-                <input type="checkbox" id="btnNey" class="instrument" data-value="Ney" checked>
-                <label for="btnNey">Ney</label>
+    <div class="song-builder">
+        <div class="row">
+            <h3>Makam</h3>
+            <div class="opts">
+                <div class="mo-btn inline">
+                    <input type="radio" name="optionsM" id="btnHicaz" class="makam" data-value="Hicaz" checked>
+                    <label for="btnHicaz">Hicaz</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="radio" name="optionsM" id="btnUssak" class="makam" data-value="Uşşak">
+                    <label for="btnUssak">Uşşak</label>
+                </div>
+                <div class="mo-btn inline" style="height: 0;"></div>
+                <div class="mo-btn inline" style="height: 0;"></div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <h3>Tempo</h3>
-        <div class="opts">
-            <div class="mo-btn inline">
-                <input type="radio" name="optionsT" id="btn80" class="tempo" data-value="80" checked>
-                <label for="btn80">80</label>
+        <div class="row">
+            <h3>Orkestra</h3>
+            <div class="opts">
+                <div class="mo-btn inline">
+                    <input type="checkbox" id="btnUd" class="instrument" data-value="Ud" checked>
+                    <label for="btnUd">Ud</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="checkbox" id="btnKanun" class="instrument" data-value="Kanun" checked>
+                    <label for="btnKanun">Kanun</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="checkbox" id="btnTanbur" class="instrument" data-value="Tanbur" checked>
+                    <label for="btnTanbur">Tanbur</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="checkbox" id="btnNey" class="instrument" data-value="Ney" checked>
+                    <label for="btnNey">Ney</label>
+                </div>
             </div>
-            <div class="mo-btn inline">
-                <input type="radio" name="optionsT" id="btn100" class="tempo" data-value="100">
-                <label for="btn100">100</label>
+        </div>
+
+        <div class="row">
+            <h3>Tempo</h3>
+            <div class="opts">
+                <div class="mo-btn inline">
+                    <input type="radio" name="optionsT" id="btn80" class="tempo" data-value="80" checked>
+                    <label for="btn80">80</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="radio" name="optionsT" id="btn100" class="tempo" data-value="100">
+                    <label for="btn100">100</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="radio" name="optionsT" id="btn120" class="tempo" data-value="120">
+                    <label for="btn120">120</label>
+                </div>
+                <div class="mo-btn inline" style="height: 0;"></div>
             </div>
-            <div class="mo-btn inline">
-                <input type="radio" name="optionsT" id="btn120" class="tempo" data-value="120">
-                <label for="btn120">120</label>
+        </div>
+
+        <div class="row">
+            <h3>Perküsyon</h3>
+            <div class="opts">
+                <div class="mo-btn inline">
+                    <input type="checkbox" id="btnBendir" class="percussion" data-value="Bendir" checked>
+                    <label for="btnBendir">Bendir</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="checkbox" id="btnErbane" class="percussion" data-value="Erbane" checked>
+                    <label for="btnErbane">Erbane</label>
+                </div>
+                <div class="mo-btn inline">
+                    <input type="checkbox" id="btnKudum" class="percussion" data-value="Kudüm" checked>
+                    <label for="btnKudum">Kudüm</label>
+                </div>
+                <div class="mo-btn inline" style="height: 0;"></div>
             </div>
-            <div class="mo-btn inline" style="height: 0;"></div>
+        </div>
+
+        <div class="row">
+            <h3>Müzikalite <<span id="spnMusicality">5</span>></h3>
+            <div class="opts" style="margin: 20px 0;">
+                <input type="range" min="1" max="10" value="5" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+            </div>
+        </div>
+
+        <div class="row" style="padding-bottom: 0;">
+            <button type="button" id="btnGenerateMusic" class="btn">Bestele</button>
         </div>
     </div>
-
-    <div class="row">
-        <h3>Perküsyon</h3>
-        <div class="opts">
-            <div class="mo-btn inline">
-                <input type="checkbox" id="btnBendir" class="percussion" data-value="Bendir" checked>
-                <label for="btnBendir">Bendir</label>
-            </div>
-            <div class="mo-btn inline">
-                <input type="checkbox" id="btnErbane" class="percussion" data-value="Erbane" checked>
-                <label for="btnErbane">Erbane</label>
-            </div>
-            <div class="mo-btn inline">
-                <input type="checkbox" id="btnKudum" class="percussion" data-value="Kudüm" checked>
-                <label for="btnKudum">Kudüm</label>
-            </div>
-            <div class="mo-btn inline" style="height: 0;"></div>
+    <div class="song-player" style="display: none;">
+        <div class="row">
+            Hello
+        </div>
+        <div class="row">
+            <button type="button" id="btnBackToComposing" class="btn">Geri</button>
         </div>
     </div>
-
-    <div class="row">
-        <h3>Müzikalite <<span id="spnMusicality">5</span>></h3>
-        <div class="opts" style="margin: 20px 0;">
-            <input type="range" min="1" max="10" value="5" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
-        </div>
-    </div>
-
-    <div class="row" style="padding-bottom: 0;">
-        <button type="button" id="btnGenerateMusic" class="btn">Bestele</button>
-    </div>
-
 </div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/rangeslider.min.js"></script>
 
 <script type="text/javascript">
+    var pages = [];
+
+    function switchToPage(fromPage, toPage) {
+        var exitAnimation = (fromPage < toPage) ? "fadeOutLeft" : "fadeOutRight";
+        var enterAnimation = (fromPage < toPage) ? "fadeInRight" : "fadeInLeft";
+        var oldExitAnimation = (fromPage > toPage) ? "fadeOutLeft" : "fadeOutRight";
+        var oldEnterAnimation = (fromPage > toPage) ? "fadeInRight" : "fadeInLeft";
+        pages[fromPage].removeClass(oldEnterAnimation).animateCss(exitAnimation, function () {
+            pages[fromPage].hide();
+            pages[toPage].removeClass(oldExitAnimation).show().animateCss(enterAnimation);
+        });
+    }
+
+    $.fn.extend({
+        animateCss: function (animationName, callback) {
+            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+            this.addClass('animated ' + animationName).one(animationEnd, function () {
+                if (callback) callback();
+            });
+            return this;
+        }
+    });
 
     $(document).ready(function () {
+        pages.push($(".song-builder"));
+        pages.push($(".song-player"));
 
         $("#musicality").rangeslider({
             polyfill: false,
@@ -315,6 +352,10 @@
             onSlide: function (position, value) {
                 $("#spnMusicality").html(value);
             }
+        });
+
+        $("#btnBackToComposing").on("click", function () {
+            switchToPage(1, 0);
         });
 
         $("#btnGenerateMusic").on("click", function () {
@@ -354,6 +395,7 @@
             };
 
             console.log(postParams);
+            switchToPage(0, 1);
         });
 
     });
