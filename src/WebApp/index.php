@@ -8,7 +8,7 @@
     <meta name="author" content="ismail hakkı parlak, cem kösemen">
     <link rel="icon" href="images/favicon.png">
 
-    <title>Turca</title>
+    <title>Rastgele!</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
 
     <style type="text/css">
