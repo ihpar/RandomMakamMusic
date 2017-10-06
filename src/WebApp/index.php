@@ -110,11 +110,6 @@
             padding: 0 0 1em 0;
         }
 
-        .btn:hover {
-            background-color: #3a4d49;
-            color: #f1ca66;
-        }
-
         .btn {
             cursor: pointer;
             display: inline-block;
@@ -132,6 +127,12 @@
             transition: all 0.3s ease;
             -webkit-tap-highlight-color: transparent;
             box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #3a4d49;
+            color: #f1ca66;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
         }
 
         .slider {
