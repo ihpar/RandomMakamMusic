@@ -111,7 +111,6 @@
         .btn:hover {
             background-color: #3a4d49;
             color: #f1ca66;
-
         }
 
         .btn {
@@ -127,13 +126,10 @@
             text-align: center;
             text-decoration: none;
             border-radius: 5px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
-            -webkit-transition: all .3s ease;
-            transition: all .3s ease;
+            transition: all 0.3s ease;
             -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
         }
 
         .slider {
