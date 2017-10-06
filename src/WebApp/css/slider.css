@@ -1,0 +1,40 @@
+.slider {
+    background: #EEC765;
+    position: relative;
+    display: block;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.slider-fill {
+    background: #96993d;
+    position: absolute;
+    display: block;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    top: 0;
+    height: 100%;
+}
+
+.slider-horizontal {
+    height: 10px;
+    width: 100%;
+}
+
+.slider-handle {
+    background: #839F9B;
+    cursor: pointer;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    background-size: 100%;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
+    background-image: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    top: -12.5px;
+    touch-action: pan-y;
+}

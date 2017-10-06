@@ -10,7 +10,6 @@
 
     <title>Rastgele!</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
 
     <style type="text/css">
         html, body {
@@ -26,7 +25,7 @@
             font-weight: normal;
             color: #EEC765;
             background-color: #26292C;
-            transition: background-color 0.6s ease-in-out;
+            transition: background-color 1s ease-in-out;
         }
 
         .container {
@@ -40,6 +39,7 @@
             padding: 0;
             margin: 0;
             font-weight: normal;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
         }
 
         .mo-btn {
@@ -75,7 +75,7 @@
             height: 1em;
             margin: -0.5em 0 0;
             opacity: 0;
-            background: #839F9B;
+            background: #57726e;
             transform: translate3d(-60px, 0, 0) scale(0.1);
             transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
         }
@@ -111,74 +111,20 @@
             padding: 0 0 1em 0;
         }
 
-        .btn {
-            cursor: pointer;
-            display: inline-block;
-            outline: 0;
-            border: none;
-            background-color: #3f514d;
-            color: #EEC765;
-            padding: 0.4em;
-            font-size: 38px;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            user-select: none;
-            transition: all 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn:hover {
-            background-color: #3a4d49;
-            color: #f1ca66;
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-        }
-
-        .slider {
-            background: #EEC765;
-            position: relative;
-            display: block;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-        }
-
-        .slider-fill {
-            background: #96993d;
-            position: absolute;
-            display: block;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-            top: 0;
-            height: 100%;
-        }
-
-        .slider-horizontal {
-            height: 10px;
-            width: 100%;
-        }
-
-        .slider-handle {
-            background: #839F9B;
-            cursor: pointer;
-            display: inline-block;
-            width: 35px;
-            height: 35px;
-            position: absolute;
-            background-size: 100%;
-            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
-            background-image: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
-            background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
-            background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            top: -12.5px;
-            touch-action: pan-y;
+        .last.row {
+            padding-bottom: 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
         }
 
         .song-builder, .song-player {
-            animation-duration: 0.3s;
+            animation-duration: 0.5s;
+            width: 100%;
+            position: relative;
+            min-height: calc(100vh - 32px);
+            display: flex;
+            flex-direction: column;
         }
 
         @media only screen and (max-width: 510px) {
@@ -204,9 +150,11 @@
                 flex-basis: 30%;
             }
         }
-
-
     </style>
+
+    <link href="css/button.css" rel="stylesheet">
+    <link href="css/slider.css" rel="stylesheet">
+    <link href="css/tape.css" rel="stylesheet">
 </head>
 
 <body>
@@ -291,21 +239,22 @@
         </div>
 
         <div class="row">
-            <h3>Müzikalite <<span id="spnMusicality">5</span>></h3>
+            <h3>Müzikalite <<span id="spnMusicality">3</span>></h3>
             <div class="opts" style="margin: 20px 0;">
-                <input type="range" min="1" max="10" value="5" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
+                <input type="range" min="1" max="10" value="3" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
             </div>
         </div>
 
-        <div class="row" style="padding-bottom: 0;">
+        <div class="last row">
             <button type="button" id="btnGenerateMusic" class="btn">Bestele</button>
         </div>
     </div>
     <div class="song-player" style="display: none;">
-        <div class="row">
-            Hello
+        <div class="row" style="width: 100%; position: absolute; top: 50%; margin: -78px 0 0 0; padding: 0;">
+            <div class="tape"></div>
+            <h3 style="text-align: center; padding-top: 20px;" id="status">Şarkı besteleniyor...</h3>
         </div>
-        <div class="row">
+        <div class="last row">
             <button type="button" id="btnBackToComposing" class="btn">Geri</button>
         </div>
     </div>
@@ -316,29 +265,27 @@
 
 <script type="text/javascript">
     var pages = [];
-    var bgColors = ["#26292C", "#EEC765"];
+    var bgColors = ["#26292C", "#443D3A"];
 
     function switchToPage(fromPage, toPage) {
-        var exitAnimation = (fromPage < toPage) ? "fadeOutLeft" : "fadeOutRight";
-        var enterAnimation = (fromPage < toPage) ? "fadeInRight" : "fadeInLeft";
-        var oldExitAnimation = (fromPage > toPage) ? "fadeOutLeft" : "fadeOutRight";
-        var oldEnterAnimation = (fromPage > toPage) ? "fadeInRight" : "fadeInLeft";
         $("body").css({backgroundColor: bgColors[toPage]});
-        pages[fromPage].removeClass(oldEnterAnimation).animateCss(exitAnimation, function () {
-            pages[fromPage].hide();
-            pages[toPage].removeClass(oldExitAnimation).show().animateCss(enterAnimation);
-        });
-    }
+        var newLeft = (fromPage < toPage) ? -1000 : 1000;
 
-    $.fn.extend({
-        animateCss: function (animationName, callback) {
-            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-            this.addClass('animated ' + animationName).one(animationEnd, function () {
-                if (callback) callback();
-            });
-            return this;
-        }
-    });
+        pages[fromPage].animate({
+            left: newLeft,
+            opacity: 0
+        }, 200, function () {
+            pages[fromPage].hide();
+            pages[toPage].show().css({
+                left: -1 * newLeft,
+                opacity: 0
+            }).animate({
+                left: 0,
+                opacity: 1
+            }, 200);
+        });
+
+    }
 
     $(document).ready(function () {
         pages.push($(".song-builder"));
