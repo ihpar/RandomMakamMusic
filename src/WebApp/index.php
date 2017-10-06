@@ -15,15 +15,15 @@
         html, body {
             padding: 0;
             margin: 0;
-            background-color: #181B21;
+            background-color: #26292C;
         }
 
         body {
             min-height: 100vh;
             font-family: 'Oswald', sans-serif;
-            font-size: 24px;
+            font-size: 25px;
             font-weight: normal;
-            color: #d6c372;
+            color: #EEC765;
         }
 
         .container {
@@ -62,7 +62,7 @@
             height: 1.4em;
             margin: -0.7em 0 0;
             background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid #EEC765;
             box-sizing: border-box;
         }
 
@@ -72,7 +72,7 @@
             height: 1em;
             margin: -0.5em 0 0;
             opacity: 0;
-            background: #8C7853;
+            background: #839F9B;
             transform: translate3d(-60px, 0, 0) scale(0.1);
             transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
         }
@@ -93,18 +93,117 @@
 
         .opts {
             margin-top: 0.2em;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
 
         div.inline {
-            display: inline-block;
-            margin-right: 1em;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 5%;
         }
 
         .row {
-            padding: 0.75em 0;
+            padding: 0 0 1em 0;
         }
-    </style>
 
+        .btn:hover {
+            background-color: #3a4d49;
+            color: #f1ca66;
+
+        }
+
+        .btn {
+            cursor: pointer;
+            display: inline-block;
+            outline: 0;
+            border: none;
+            background-color: #3f514d;
+            color: #EEC765;
+            padding: 0.4em;
+            font-size: 38px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .slider {
+            background: #EEC765;
+            position: relative;
+            display: block;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .slider-fill {
+            background: #96993d;
+            position: absolute;
+            display: block;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            top: 0;
+            height: 100%;
+        }
+
+        .slider-horizontal {
+            height: 10px;
+            width: 100%;
+        }
+
+        .slider-handle {
+            background: #839F9B;
+            cursor: pointer;
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…Igd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g);
+            background-size: 100%;
+            background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
+            background-image: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
+            background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
+            background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            top: -12.5px;
+            touch-action: pan-y;
+        }
+
+        @media only screen and (max-width: 510px) {
+            body {
+                font-size: 20px;
+            }
+
+            .btn {
+                font-size: 30px;
+            }
+
+            .slider-handle {
+                width: 30px;
+                height: 30px;
+                top: -10px;
+            }
+        }
+
+        @media only screen and (max-width: 450px) {
+            div.inline {
+                flex-grow: 1;
+                flex-shrink: 1;
+                flex-basis: 30%;
+            }
+        }
+
+
+    </style>
 </head>
 
 <body>
@@ -116,13 +215,15 @@
         <h3>Makam</h3>
         <div class="opts">
             <div class="mo-btn inline">
-                <input type="radio" name="optionsM" id="btnHicaz" checked>
+                <input type="radio" name="optionsM" id="btnHicaz" class="makam" data-value="Hicaz" checked>
                 <label for="btnHicaz">Hicaz</label>
             </div>
             <div class="mo-btn inline">
-                <input type="radio" name="optionsM" id="btnUssak">
+                <input type="radio" name="optionsM" id="btnUssak" class="makam" data-value="Uşşak">
                 <label for="btnUssak">Uşşak</label>
             </div>
+            <div class="mo-btn inline" style="height: 0;"></div>
+            <div class="mo-btn inline" style="height: 0;"></div>
         </div>
     </div>
 
@@ -130,19 +231,19 @@
         <h3>Orkestra</h3>
         <div class="opts">
             <div class="mo-btn inline">
-                <input type="checkbox" id="btnUd" checked>
+                <input type="checkbox" id="btnUd" class="instrument" data-value="Ud" checked>
                 <label for="btnUd">Ud</label>
             </div>
             <div class="mo-btn inline">
-                <input type="checkbox" id="btnKanun" checked>
+                <input type="checkbox" id="btnKanun" class="instrument" data-value="Kanun" checked>
                 <label for="btnKanun">Kanun</label>
             </div>
             <div class="mo-btn inline">
-                <input type="checkbox" id="btnTanbur" checked>
+                <input type="checkbox" id="btnTanbur" class="instrument" data-value="Tanbur" checked>
                 <label for="btnTanbur">Tanbur</label>
             </div>
             <div class="mo-btn inline">
-                <input type="checkbox" id="btnNey" checked>
+                <input type="checkbox" id="btnNey" class="instrument" data-value="Ney" checked>
                 <label for="btnNey">Ney</label>
             </div>
         </div>
@@ -152,17 +253,18 @@
         <h3>Tempo</h3>
         <div class="opts">
             <div class="mo-btn inline">
-                <input type="radio" name="optionsT" id="btn80" checked>
+                <input type="radio" name="optionsT" id="btn80" class="tempo" data-value="80" checked>
                 <label for="btn80">80</label>
             </div>
             <div class="mo-btn inline">
-                <input type="radio" name="optionsT" id="btn100">
+                <input type="radio" name="optionsT" id="btn100" class="tempo" data-value="100">
                 <label for="btn100">100</label>
             </div>
             <div class="mo-btn inline">
-                <input type="radio" name="optionsT" id="btn120">
+                <input type="radio" name="optionsT" id="btn120" class="tempo" data-value="120">
                 <label for="btn120">120</label>
             </div>
+            <div class="mo-btn inline" style="height: 0;"></div>
         </div>
     </div>
 
@@ -170,113 +272,78 @@
         <h3>Perküsyon</h3>
         <div class="opts">
             <div class="mo-btn inline">
-                <input type="checkbox" id="btnBendir" checked>
+                <input type="checkbox" id="btnBendir" class="percussion" data-value="Bendir" checked>
                 <label for="btnBendir">Bendir</label>
             </div>
             <div class="mo-btn inline">
-                <input type="checkbox" id="btnErbane" checked>
+                <input type="checkbox" id="btnErbane" class="percussion" data-value="Erbane" checked>
                 <label for="btnErbane">Erbane</label>
             </div>
             <div class="mo-btn inline">
-                <input type="checkbox" id="btnKudum" checked>
+                <input type="checkbox" id="btnKudum" class="percussion" data-value="Kudüm" checked>
                 <label for="btnKudum">Kudüm</label>
             </div>
+            <div class="mo-btn inline" style="height: 0;"></div>
         </div>
     </div>
 
     <div class="row">
-        <h3>Müzikalite <span id="spnMusicality">(5)</span></h3>
-        <div class="opts">
-            <input id="musicality">
+        <h3>Müzikalite <<span id="spnMusicality">5</span>></h3>
+        <div class="opts" style="margin: 20px 0;">
+            <input type="range" min="1" max="10" value="5" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
         </div>
     </div>
 
-    <div class="row" id="dvSongHolder" style="height: 5px; display: none;">
-        <div id="dvLoader" style="display: none;">
-            <div style="background-color:#24888c; color:#fff; font-size:24px; border-radius:6px; padding:0px 16px; line-height:46px;">
-                COMPOSING...
-            </div>
-        </div>
-
-        <div id="dvGeneratedSong" style="display: none;">
-            <h3 style="margin-top: 0px;">Generated Song</h3>
-            <div id="audioWrap"></div>
-        </div>
-    </div>
-
-    <div class="row">
+    <div class="row" style="padding-bottom: 0;">
         <button type="button" id="btnGenerateMusic" class="btn">Bestele</button>
     </div>
 
 </div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/rangeslider.min.js"></script>
 
 <script type="text/javascript">
-    /*
-    var gotAudio = false;
-    var player = null;
-    var canGenerateSong = true;
 
     $(document).ready(function () {
 
-        player = $.AudioPlayer;
-        player.init({
-            container: "#audioWrap",
-            source: "",
-            imagePath: "images",
-            debuggers: false,
-            allowSeek: true
+        $("#musicality").rangeslider({
+            polyfill: false,
+
+            rangeClass: "slider",
+            horizontalClass: "slider-horizontal",
+            fillClass: "slider-fill",
+            handleClass: "slider-handle",
+
+            // Callback function
+            onSlide: function (position, value) {
+                $("#spnMusicality").html(value);
+            }
         });
 
-        $("#musicality").slider();
-        $("#musicality").on("change", function (e) {
-            $("#spnMusicality").html("(" + e.value.newValue + ")");
-        });
-
-        $("#btnGenerateMusic").click(function () {
-
-            canGenerateSong = true;
-
+        $("#btnGenerateMusic").on("click", function () {
             // get selected makam
-            var makam = $("#btnUssak").is(':checked') ? "Ussak" : "Hicaz";
+            var makam = $("input.makam:checked").attr("data-value");
             // get selected tempo
-            var tempo = $("#btn80").is(':checked') ? 80 : ($("#btn100").is(':checked') ? 100 : 120);
+            var tempo = parseInt($("input.tempo:checked").attr("data-value"));
             // get selected instruments
             var instruments = [];
-            if ($("#btnUd").is(':checked')) {
-                instruments.push("Ud");
-            }
-            if ($("#btnKanun").is(':checked')) {
-                instruments.push("Kanun");
-            }
-            if ($("#btnTanbur").is(':checked')) {
-                instruments.push("Tanbur");
-            }
-            if ($("#btnNey").is(':checked')) {
-                instruments.push("Ney");
-            }
+            $("input.instrument:checked").each(function () {
+                instruments.push($(this).attr("data-value"));
+            });
 
-            if (instruments.length == 0) {
-                canGenerateSong = false;
-                alert("Please select at least 1 instrument!");
+            if (instruments.length === 0) {
+                alert("En az bir tane enstrüman seçiniz.");
                 return false;
             }
             // get selected percussion
             var percussion = [];
-            if ($("#btnBendir").is(':checked')) {
-                percussion.push("Bendir");
-            }
-            if ($("#btnErbane").is(':checked')) {
-                percussion.push("Erbane");
-            }
-            if ($("#btnKudum").is(':checked')) {
-                percussion.push("Kudum");
-            }
+            $("input.percussion:checked").each(function () {
+                percussion.push($(this).attr("data-value"));
+            });
 
-            if (percussion.length == 0) {
-                canGenerateSong = false;
-                alert("Please select at least 1 percussion!");
+            if (percussion.length === 0) {
+                alert("En az bir tane perküsyon seçiniz.");
                 return false;
             }
             // get selected musicality
@@ -290,54 +357,11 @@
                 x: musicality
             };
 
-            // ajax call
-            if (canGenerateSong) {
-
-                $("#btnGenerateMusic").attr("disabled", true);
-
-                if (!gotAudio) {
-                    $("#dvSongHolder").animate({height: "85px"}, 1000, function () {
-                        $("#dvLoader").fadeIn(2000);
-                    });
-                }
-                else {
-                    $("#dvGeneratedSong").fadeOut(500, function () {
-                        $("#dvLoader").fadeIn(2000);
-                    });
-                }
-
-                $.ajax({
-                    method: "POST",
-                    url: "song-generator.php",
-                    data: postParams
-                })
-                    .done(function (m) {
-                        m = m.trim();
-                        console.log(m);
-                        if (m.indexOf(".mp3") > 0) {
-                            $("#dvLoader").fadeOut(400, function () {
-                                $("#dvGeneratedSong").fadeIn(1000, function () {
-                                    player.updateSource({
-                                        source: m
-                                    });
-
-                                    $("#btnGenerateMusic").removeAttr("disabled");
-                                });
-                            });
-                            gotAudio = true;
-                        }
-                        else {
-                            alert("An unexpected error ocuured, sorry!");
-                            $("#dvLoader").fadeOut(1000);
-                            $("#btnGenerateMusic").removeAttr("disabled");
-                        }
-
-                    });
-            }
+            console.log(postParams);
         });
 
     });
-*/
+
 </script>
 </body>
 
