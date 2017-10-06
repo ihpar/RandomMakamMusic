@@ -16,7 +16,6 @@
         html, body {
             padding: 0;
             margin: 0;
-            background-color: #26292C;
             overflow-x: hidden;
         }
 
@@ -26,6 +25,8 @@
             font-size: 25px;
             font-weight: normal;
             color: #EEC765;
+            background-color: #26292C;
+            transition: background-color 0.6s ease-in-out;
         }
 
         .container {
@@ -315,12 +316,14 @@
 
 <script type="text/javascript">
     var pages = [];
+    var bgColors = ["#26292C", "#EEC765"];
 
     function switchToPage(fromPage, toPage) {
         var exitAnimation = (fromPage < toPage) ? "fadeOutLeft" : "fadeOutRight";
         var enterAnimation = (fromPage < toPage) ? "fadeInRight" : "fadeInLeft";
         var oldExitAnimation = (fromPage > toPage) ? "fadeOutLeft" : "fadeOutRight";
         var oldEnterAnimation = (fromPage > toPage) ? "fadeInRight" : "fadeInLeft";
+        $("body").css({backgroundColor: bgColors[toPage]});
         pages[fromPage].removeClass(oldEnterAnimation).animateCss(exitAnimation, function () {
             pages[fromPage].hide();
             pages[toPage].removeClass(oldExitAnimation).show().animateCss(enterAnimation);
