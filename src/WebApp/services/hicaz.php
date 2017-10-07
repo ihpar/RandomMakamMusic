@@ -137,5 +137,4 @@
 		public function getChorusEndings() {
 			return $this->chorusEndings;
 		}
-	} 
-?>
+	}

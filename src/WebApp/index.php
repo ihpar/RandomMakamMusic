@@ -272,7 +272,7 @@
                     <label for="btnErbane">Erbane</label>
                 </div>
                 <div class="mo-btn inline">
-                    <input type="checkbox" id="btnKudum" class="percussion" data-value="Kudüm" checked>
+                    <input type="checkbox" id="btnKudum" class="percussion" data-value="Kudum" checked>
                     <label for="btnKudum">Kudüm</label>
                 </div>
                 <div class="mo-btn inline" style="height: 0;"></div>
@@ -314,12 +314,11 @@
                 <h3 id="status-msg">Şarkı besteleniyor...</h3>
             </div>
             <div id="dv-player-controls">
-                <div class="pp-button"></div>
+                <div class="pp-button paused"></div>
             </div>
         </div>
 
         <div class="last row">
-            <input type="button" value="toggle" onclick="togglePlayer(visibility);visibility=!visibility;"><br>
             <button type="button" id="btnBackToComposing" class="btn">Geri</button>
         </div>
     </div>
@@ -333,8 +332,8 @@
     var pages = [];
     var bgColors = ["#26292C", "#443D3A"];
     var $ppBtn;
-    var visibility = true;
     var music = null;
+    var musicPlaying = false;
 
     function loadSong(url) {
         music = new Howl({
@@ -342,8 +341,13 @@
         });
 
         music.once("load", function () {
-            music.volume(1);
-            music.play();
+            $ppBtn.addClass("paused");
+            togglePlayer(true);
+            setTimeout(function () {
+                music.volume(1);
+                music.play();
+                musicPlaying = true;
+            }, 400);
         });
     }
 
@@ -385,6 +389,32 @@
         });
     }
 
+    function buildSongFile(fileName) {
+        $.ajax({
+            method: "POST",
+            url: "services/song-generator.php",
+            dataType: "json",
+            data: {
+                fileName: fileName
+            },
+            success: function (msg) {
+                if (typeof(msg) !== 'undefined' && msg && typeof(msg["res"]) !== 'undefined' && msg["res"] && msg["res"] === "OK") {
+                    setStatusMessage("Şarkı yükleniyor...");
+                    setTimeout(function () {
+                        loadSong(msg.src);
+                    }, 400);
+                }
+                else {
+                    alert("MP3 oluşturulurken bir hata oluştu.");
+                }
+            },
+            error: function (msg) {
+                console.log(msg);
+                alert("MP3 oluşturulurken beklenmedik bir hata oluştu.");
+            }
+        });
+    }
+
     $(document).ready(function () {
         pages.push($(".song-builder"));
         pages.push($(".song-player"));
@@ -392,11 +422,15 @@
         $ppBtn = $(".pp-button");
         $ppBtn.on("click", function () {
             var $this = $(this);
-            if(music && $this.hasClass("paused")) {
-                music.play();
-            }
-            else if(music) {
+            if (music && $this.hasClass("paused")) {
                 music.pause();
+                musicPlaying = false;
+            }
+            else if (music) {
+                if (!musicPlaying) {
+                    music.play();
+                }
+                musicPlaying = true;
             }
             $this.toggleClass("paused");
         });
@@ -455,8 +489,42 @@
                 x: musicality
             };
 
-            console.log(postParams);
-            switchToPage(0, 1);
+            $.ajax({
+                method: "POST",
+                url: "services/sheet-builder.php",
+                dataType: "json",
+                data: postParams,
+                success: function (msg) {
+                    if (typeof(msg) !== 'undefined' && msg && typeof(msg["res"]) !== 'undefined' && msg["res"] && msg["res"] === "OK") {
+                        if (music && musicPlaying) {
+                            music.pause();
+                            music.off("load");
+                            music = null;
+                            musicPlaying = false;
+                        }
+                        setStatusMessage("Şarkı besteleniyor...");
+                        togglePlayer(false);
+                        var data = msg["data"];
+                        switchToPage(0, 1);
+                        // TODO del timeout
+                        setTimeout(function () {
+                            buildSongFile(data.file);
+                        }, 2000);
+
+                        setTimeout(function () {
+                            setStatusMessage("MP3 Oluşturuluyor...");
+                        }, 1000);
+                    }
+                    else {
+                        alert("Şarkı bestelenirken bir hata oluştu.");
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+                    alert("Şarkı bestelenirken beklenmedik bir hata oluştu.");
+                }
+            });
+
         });
 
     });
