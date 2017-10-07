@@ -327,13 +327,25 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/rangeslider.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.5/howler.min.js"></script>
 
 <script type="text/javascript">
     var pages = [];
     var bgColors = ["#26292C", "#443D3A"];
     var $ppBtn;
     var visibility = true;
+    var music = null;
 
+    function loadSong(url) {
+        music = new Howl({
+            src: [url]
+        });
+
+        music.once("load", function () {
+            music.volume(1);
+            music.play();
+        });
+    }
 
     function setStatusMessage(msg) {
         var $stMsg = $("#status-msg");
@@ -371,7 +383,6 @@
                 opacity: 1
             }, 200);
         });
-
     }
 
     $(document).ready(function () {
@@ -380,7 +391,14 @@
 
         $ppBtn = $(".pp-button");
         $ppBtn.on("click", function () {
-            $(this).toggleClass("paused");
+            var $this = $(this);
+            if(music && $this.hasClass("paused")) {
+                music.play();
+            }
+            else if(music) {
+                music.pause();
+            }
+            $this.toggleClass("paused");
         });
 
         $("#musicality").rangeslider({
