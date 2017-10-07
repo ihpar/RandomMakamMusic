@@ -40,6 +40,7 @@
             margin: 0;
             font-weight: normal;
             text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            color: #BDB298;
         }
 
         .mo-btn {
@@ -250,8 +251,23 @@
         </div>
     </div>
     <div class="song-player" style="display: none;">
-        <div class="row" style="width: 100%; position: absolute; top: 50%; margin: -78px 0 0 0; padding: 0;">
-            <div class="tape"></div>
+        <div style="position: absolute; width: 100%; top: 50%; margin-top: -126px;">
+            <div class="loader-wrapper">
+                <div class="loader">
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                </div>
+
+                <div id="loader2" class="loader">
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                </div>
+
+                <div id="loader3" class="loader">
+                    <div class="roller"></div>
+                    <div class="roller"></div>
+                </div>
+            </div>
             <h3 style="text-align: center; padding-top: 20px;" id="status">Şarkı besteleniyor...</h3>
         </div>
         <div class="last row">

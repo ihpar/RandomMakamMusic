@@ -4,7 +4,7 @@
     outline: 0;
     border: none;
     background-color: #3f514d;
-    color: #EEC765;
+    color: #BDB298;
     padding: 0.2em;
     font-size: 38px;
     font-family: inherit;
@@ -13,7 +13,7 @@
     text-decoration: none;
     border-radius: 3px;
     user-select: none;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
     -webkit-tap-highlight-color: transparent;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
@@ -21,6 +21,6 @@
 
 .btn:hover {
     background-color: #3a4d49;
-    color: #f1ca66;
+    color: #D0C098;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
