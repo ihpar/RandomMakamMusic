@@ -25,7 +25,7 @@
             font-weight: normal;
             color: #EEC765;
             background-color: #26292C;
-            transition: background-color 1s ease-in-out;
+            transition: background-color 0.4s ease-in-out;
         }
 
         .container {
@@ -126,6 +126,46 @@
             min-height: calc(100vh - 32px);
             display: flex;
             flex-direction: column;
+        }
+
+        .pp-button {
+            box-sizing: border-box;
+            width: 0;
+            height: 144px;
+            border-color: transparent transparent transparent #96993d;
+            transition: 200ms all ease;
+            cursor: pointer;
+            border-style: solid;
+            border-width: 72px 0 72px 120px;
+            margin: 0 auto;
+            opacity: 0;
+        }
+
+        .pp-button.paused {
+            border-style: double;
+            border-width: 0px 0 0px 120px;
+            border-color: transparent transparent transparent #BDB298;
+        }
+
+        #dv-loader-wrapper {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            margin-top: -126px;
+        }
+
+        #status-msg {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            top: 12px;
+        }
+
+        #dv-player-controls {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            margin-top: -126px;
         }
 
         @media only screen and (max-width: 510px) {
@@ -251,26 +291,35 @@
         </div>
     </div>
     <div class="song-player" style="display: none;">
-        <div style="position: absolute; width: 100%; top: 50%; margin-top: -126px;">
-            <div class="loader-wrapper">
-                <div class="loader">
-                    <div class="roller"></div>
-                    <div class="roller"></div>
+
+        <div id="dv-lo-and-controls">
+            <div id="dv-loader-wrapper">
+                <div class="loader-wrapper">
+                    <div class="loader">
+                        <div class="roller"></div>
+                        <div class="roller"></div>
+                    </div>
+
+                    <div id="loader2" class="loader">
+                        <div class="roller"></div>
+                        <div class="roller"></div>
+                    </div>
+
+                    <div id="loader3" class="loader">
+                        <div class="roller"></div>
+                        <div class="roller"></div>
+                    </div>
                 </div>
 
-                <div id="loader2" class="loader">
-                    <div class="roller"></div>
-                    <div class="roller"></div>
-                </div>
-
-                <div id="loader3" class="loader">
-                    <div class="roller"></div>
-                    <div class="roller"></div>
-                </div>
+                <h3 id="status-msg">Şarkı besteleniyor...</h3>
             </div>
-            <h3 style="text-align: center; padding-top: 20px;" id="status">Şarkı besteleniyor...</h3>
+            <div id="dv-player-controls">
+                <div class="pp-button"></div>
+            </div>
         </div>
+
         <div class="last row">
+            <input type="button" value="toggle" onclick="togglePlayer(visibility);visibility=!visibility;"><br>
             <button type="button" id="btnBackToComposing" class="btn">Geri</button>
         </div>
     </div>
@@ -282,6 +331,28 @@
 <script type="text/javascript">
     var pages = [];
     var bgColors = ["#26292C", "#443D3A"];
+    var $ppBtn;
+    var visibility = true;
+
+
+    function setStatusMessage(msg) {
+        var $stMsg = $("#status-msg");
+        $stMsg.animate({opacity: 0}, 200, function () {
+            $stMsg.html(msg);
+            $stMsg.animate({opacity: 1}, 200);
+        })
+    }
+
+    function togglePlayer(isVisible) {
+        if (isVisible) {
+            $("#dv-loader-wrapper").fadeOut(400);
+            $ppBtn.css({opacity: 1});
+        }
+        else {
+            $ppBtn.css({opacity: 0});
+            $("#dv-loader-wrapper").fadeIn(400);
+        }
+    }
 
     function switchToPage(fromPage, toPage) {
         $("body").css({backgroundColor: bgColors[toPage]});
@@ -306,6 +377,11 @@
     $(document).ready(function () {
         pages.push($(".song-builder"));
         pages.push($(".song-player"));
+
+        $ppBtn = $(".pp-button");
+        $ppBtn.on("click", function () {
+            $(this).toggleClass("paused");
+        });
 
         $("#musicality").rangeslider({
             polyfill: false,
