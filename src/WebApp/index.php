@@ -168,6 +168,25 @@
             margin-top: -126px;
         }
 
+        .flags {
+            float: right;
+        }
+
+        .flag {
+            height: 1em;
+            display: inline-block;
+            margin-left: 8px;
+            cursor: pointer;
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .flag.active, .flag:hover {
+            opacity: 1;
+        }
+
         @media only screen and (max-width: 510px) {
             body {
                 font-size: 20px;
@@ -204,7 +223,13 @@
 <div class="container">
     <div class="song-builder">
         <div class="row">
-            <h3>Makam</h3>
+            <h3>
+                Makam
+                <div class="flags">
+                    <img class="flag" src="images/tr.svg" data-lang="TR">
+                    <img class="flag active" src="images/gb.svg" data-lang="EN">
+                </div>
+            </h3>
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsM" id="btnHicaz" class="makam" data-value="Hicaz" checked>
@@ -331,9 +356,64 @@
 <script type="text/javascript">
     var pages = [];
     var bgColors = ["#26292C", "#443D3A"];
-    var $ppBtn;
+    var $ppBtn, $flags;
+    var currentLang;
     var music = null;
     var musicPlaying = false;
+    var tongue = {
+        EN: {
+            makam: "Makam",
+            hijaz: "Hijaz",
+            ussak: "Ussak",
+            orchestra: "Orchestra",
+            oud: "Oud",
+            kanun: "Kanun",
+            tanbur: "Tanbur",
+            reed: "Reed",
+            tempo: "Tempo",
+            percussion: "Percussion",
+            bendir: "Bendir",
+            erbane: "Erbane",
+            kudum: "Kudum",
+            musicality: "Musicality",
+            compose: "Compose"
+            songLoading: "Song loading...",
+            mp3Error: "An error occurred while creating MP3 file.",
+            mp3Exception: "An unexpected error occurred while creating MP3 file.",
+            exPickInstrument: "Pick at least 1 instrument.",
+            exPickPercussion: "Pick at least 1 percussion.",
+            songComposing: "Composing...",
+            mp3Creating: "Creating MP3 file...",
+            exSongComposing: "An error occurred while composing the song.",
+            exSongException: "An unexpected error occurred while composing the song."
+        },
+        TR: {
+            makam: "Makam",
+            hijaz: "Hicaz",
+            ussak: "Uşşak",
+            orchestra: "Orkestra",
+            oud: "Ud",
+            kanun: "Kanun",
+            tanbur: "Tanbur",
+            reed: "Ney",
+            tempo: "Tempo",
+            percussion: "Perküsyon",
+            bendir: "Bendir",
+            erbane: "Erbane",
+            kudum: "Kudüm",
+            musicality: "Müzikalite",
+            compose: "Bestele"
+            songLoading: "Şarkı yükleniyor...",
+            mp3Error: "MP3 oluşturulurken bir hata oluştu.",
+            mp3Exception: "MP3 oluşturulurken beklenmedik bir hata oluştu.",
+            exPickInstrument: "En az bir tane enstrüman seçiniz.",
+            exPickPercussion: "En az bir tane perküsyon seçiniz.",
+            songComposing: "Şarkı besteleniyor...",
+            mp3Creating: "MP3 Oluşturuluyor...",
+            exSongComposing: "Şarkı bestelenirken bir hata oluştu.",
+            exSongException: "Şarkı bestelenirken beklenmedik bir hata oluştu."
+        }
+    };
 
     function loadSong(url) {
         music = new Howl({
@@ -419,6 +499,18 @@
     $(document).ready(function () {
         pages.push($(".song-builder"));
         pages.push($(".song-player"));
+
+        currentLang = $(".flag.active").attr("data-lang");
+        $flags = $(".flag");
+        $flags.on("click", function () {
+            var $this = $(this);
+            var newLang = $this.attr("data-lang");
+            if (newLang !== currentLang) {
+                currentLang = newLang;
+                $(".flag.active").removeClass("active");
+                $this.addClass("active");
+            }
+        });
 
         $ppBtn = $(".pp-button");
         $ppBtn.on("click", function () {
