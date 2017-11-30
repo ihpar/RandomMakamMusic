@@ -211,7 +211,7 @@
                     <label for="btnHicaz">Hicaz</label>
                 </div>
                 <div class="mo-btn inline">
-                    <input type="radio" name="optionsM" id="btnUssak" class="makam" data-value="Uşşak">
+                    <input type="radio" name="optionsM" id="btnUssak" class="makam" data-value="Ussak">
                     <label for="btnUssak">Uşşak</label>
                 </div>
                 <div class="mo-btn inline" style="height: 0;"></div>
@@ -400,9 +400,10 @@
             success: function (msg) {
                 if (typeof(msg) !== 'undefined' && msg && typeof(msg["res"]) !== 'undefined' && msg["res"] && msg["res"] === "OK") {
                     setStatusMessage("Şarkı yükleniyor...");
+                    console.log(msg);
                     setTimeout(function () {
                         loadSong(msg.src);
-                    }, 400);
+                    }, 100);
                 }
                 else {
                     alert("MP3 oluşturulurken bir hata oluştu.");
@@ -509,7 +510,7 @@
                         // TODO del timeout
                         setTimeout(function () {
                             buildSongFile(data.file);
-                        }, 2000);
+                        }, 1000);
 
                         setTimeout(function () {
                             setStatusMessage("MP3 Oluşturuluyor...");
