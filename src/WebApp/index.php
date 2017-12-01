@@ -181,6 +181,7 @@
             margin: 0 0 0 6px;
             cursor: pointer;
             opacity: 0.5;
+            border-radius: 7px;
             transition: opacity 0.5s ease;
         }
 
@@ -337,7 +338,7 @@
         </div>
 
         <div class="row">
-            <h3><span class="lang" data-key="musicality">Musicality</span> <<span id="spnMusicality">3</span>></h3>
+            <h3><span class="lang" data-key="musicality" style="width: 140px;">Musicality</span> <<span id="spnMusicality">3</span>></h3>
             <div class="opts" style="margin: 20px 0;">
                 <input type="range" min="1" max="10" value="3" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
             </div>
@@ -560,7 +561,7 @@
 
                     setTimeout(function () {
                         $that.removeClass("text-animating");
-                    }, 420);
+                    }, 500);
 
                 });
             }
