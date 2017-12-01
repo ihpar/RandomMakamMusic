@@ -422,6 +422,7 @@
             exPickPercussion: "Pick at least 1 percussion.",
             songComposing: "Composing...",
             mp3Creating: "Creating MP3 file...",
+            canTakeTime: "Will take some time...",
             exSongComposing: "An error occurred while composing the song.",
             exSongException: "An unexpected error occurred while composing the song."
         },
@@ -453,12 +454,17 @@
             exPickPercussion: "En az bir tane perküsyon seçiniz.",
             songComposing: "Şarkı besteleniyor...",
             mp3Creating: "MP3 Oluşturuluyor...",
+            canTakeTime: "Biraz zaman alacak...",
             exSongComposing: "Şarkı bestelenirken bir hata oluştu.",
             exSongException: "Şarkı bestelenirken beklenmedik bir hata oluştu."
         }
     };
+    var checkTimeInterval;
+    var start;
 
     function loadSong(url) {
+        clearInterval(checkTimeInterval);
+
         music = new Howl({
             src: [url]
         });
@@ -525,7 +531,7 @@
                     setStatusMessage(tongue[currentLang].songLoading);
                     setTimeout(function () {
                         loadSong(msg.src);
-                    }, 100);
+                    }, 500);
                 }
                 else {
                     alert(tongue[currentLang].mp3Error);
@@ -536,6 +542,14 @@
                 alert(tongue[currentLang].mp3Exception);
             }
         });
+    }
+
+    function setTimerMessage() {
+        var now = new Date();
+        var timeDiff = (now - start) / 1000;
+        if(timeDiff > 4) {
+            setStatusMessage(tongue[currentLang].canTakeTime);
+        }
     }
 
     $(document).ready(function () {
@@ -661,6 +675,10 @@
 
                         setTimeout(function () {
                             setStatusMessage(tongue[currentLang].mp3Creating);
+                            start = new Date();
+                            checkTimeInterval = setInterval(function () {
+                                setTimerMessage();
+                            }, 4000);
                         }, 1000);
                     }
                     else {
