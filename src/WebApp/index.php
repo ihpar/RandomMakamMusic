@@ -178,9 +178,8 @@
             margin-left: 8px;
             cursor: pointer;
             border-radius: 3px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
         }
 
         .flag.active, .flag:hover {
@@ -233,11 +232,11 @@
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsM" id="btnHicaz" class="makam" data-value="Hicaz" checked>
-                    <label for="btnHicaz">Hicaz</label>
+                    <label for="btnHicaz">Hijaz</label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsM" id="btnUssak" class="makam" data-value="Ussak">
-                    <label for="btnUssak">Uşşak</label>
+                    <label for="btnUssak">Ussak</label>
                 </div>
                 <div class="mo-btn inline" style="height: 0;"></div>
                 <div class="mo-btn inline" style="height: 0;"></div>
@@ -245,11 +244,11 @@
         </div>
 
         <div class="row">
-            <h3>Orkestra</h3>
+            <h3>Orchestra</h3>
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnUd" class="instrument" data-value="Ud" checked>
-                    <label for="btnUd">Ud</label>
+                    <label for="btnUd">Oud</label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnKanun" class="instrument" data-value="Kanun" checked>
@@ -261,7 +260,7 @@
                 </div>
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnNey" class="instrument" data-value="Ney" checked>
-                    <label for="btnNey">Ney</label>
+                    <label for="btnNey">Reed</label>
                 </div>
             </div>
         </div>
@@ -286,7 +285,7 @@
         </div>
 
         <div class="row">
-            <h3>Perküsyon</h3>
+            <h3>Percussion</h3>
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnBendir" class="percussion" data-value="Bendir" checked>
@@ -305,14 +304,14 @@
         </div>
 
         <div class="row">
-            <h3>Müzikalite <<span id="spnMusicality">3</span>></h3>
+            <h3>Musicality <<span id="spnMusicality">3</span>></h3>
             <div class="opts" style="margin: 20px 0;">
                 <input type="range" min="1" max="10" value="3" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
             </div>
         </div>
 
         <div class="last row">
-            <button type="button" id="btnGenerateMusic" class="btn">Bestele</button>
+            <button type="button" id="btnGenerateMusic" class="btn">Compose</button>
         </div>
     </div>
     <div class="song-player" style="display: none;">
@@ -336,7 +335,7 @@
                     </div>
                 </div>
 
-                <h3 id="status-msg">Şarkı besteleniyor...</h3>
+                <h3 id="status-msg">Composing...</h3>
             </div>
             <div id="dv-player-controls">
                 <div class="pp-button paused"></div>
@@ -344,7 +343,7 @@
         </div>
 
         <div class="last row">
-            <button type="button" id="btnBackToComposing" class="btn">Geri</button>
+            <button type="button" id="btnBackToComposing" class="btn">Back</button>
         </div>
     </div>
 </div>
@@ -376,7 +375,8 @@
             erbane: "Erbane",
             kudum: "Kudum",
             musicality: "Musicality",
-            compose: "Compose"
+            compose: "Compose",
+            goBack: "Back",
             songLoading: "Song loading...",
             mp3Error: "An error occurred while creating MP3 file.",
             mp3Exception: "An unexpected error occurred while creating MP3 file.",
@@ -402,7 +402,8 @@
             erbane: "Erbane",
             kudum: "Kudüm",
             musicality: "Müzikalite",
-            compose: "Bestele"
+            compose: "Bestele",
+            goBack: "Geri",
             songLoading: "Şarkı yükleniyor...",
             mp3Error: "MP3 oluşturulurken bir hata oluştu.",
             mp3Exception: "MP3 oluşturulurken beklenmedik bir hata oluştu.",
@@ -479,19 +480,18 @@
             },
             success: function (msg) {
                 if (typeof(msg) !== 'undefined' && msg && typeof(msg["res"]) !== 'undefined' && msg["res"] && msg["res"] === "OK") {
-                    setStatusMessage("Şarkı yükleniyor...");
-                    console.log(msg);
+                    setStatusMessage(tongue[currentLang].songLoading);
                     setTimeout(function () {
                         loadSong(msg.src);
                     }, 100);
                 }
                 else {
-                    alert("MP3 oluşturulurken bir hata oluştu.");
+                    alert(tongue[currentLang].mp3Error);
                 }
             },
             error: function (msg) {
                 console.log(msg);
-                alert("MP3 oluşturulurken beklenmedik bir hata oluştu.");
+                alert(tongue[currentLang].mp3Exception);
             }
         });
     }
@@ -558,7 +558,7 @@
             });
 
             if (instruments.length === 0) {
-                alert("En az bir tane enstrüman seçiniz.");
+                alert(tongue[currentLang].exPickInstrument);
                 return false;
             }
             // get selected percussion
@@ -568,7 +568,7 @@
             });
 
             if (percussion.length === 0) {
-                alert("En az bir tane perküsyon seçiniz.");
+                alert(tongue[currentLang].exPickPercussion);
                 return false;
             }
             // get selected musicality
@@ -595,7 +595,7 @@
                             music = null;
                             musicPlaying = false;
                         }
-                        setStatusMessage("Şarkı besteleniyor...");
+                        setStatusMessage(tongue[currentLang].songComposing);
                         togglePlayer(false);
                         var data = msg["data"];
                         switchToPage(0, 1);
@@ -605,16 +605,16 @@
                         }, 1000);
 
                         setTimeout(function () {
-                            setStatusMessage("MP3 Oluşturuluyor...");
+                            setStatusMessage(tongue[currentLang].mp3Creating);
                         }, 1000);
                     }
                     else {
-                        alert("Şarkı bestelenirken bir hata oluştu.");
+                        alert(tongue[currentLang].exSongComposing);
                     }
                 },
                 error: function (msg) {
                     console.log(msg);
-                    alert("Şarkı bestelenirken beklenmedik bir hata oluştu.");
+                    alert(tongue[currentLang].exSongException);
                 }
             });
 
