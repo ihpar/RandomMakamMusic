@@ -178,15 +178,15 @@
 
         .flag {
             display: inline-block;
-            margin: 0 0 0 6px;
+            margin: 0 0 0 8px;
             cursor: pointer;
-            opacity: 0.5;
-            border-radius: 7px;
+            opacity: 0.4;
+            border-radius: 3px;
             transition: opacity 0.5s ease;
         }
 
         .flag.active, .flag:hover {
-            opacity: 1;
+            opacity: 0.85;
         }
 
         .lang {
@@ -260,7 +260,7 @@
                 <span class="lang" data-key="makam">Makam</span>
                 <div class="flags">
                     <img class="flag" src="images/Turkey.png" data-lang="TR">
-                    <img class="flag active" src="images/United-Kingdom.png" data-lang="EN">
+                    <img class="flag active" src="images/United-States-of-America.png" data-lang="EN">
                 </div>
             </h3>
             <div class="opts">
