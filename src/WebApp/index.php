@@ -8,7 +8,7 @@
     <meta name="author" content="ismail hakkı parlak, cem kösemen">
     <link rel="icon" href="images/favicon.png">
 
-    <title>Rastgele!</title>
+    <title class="lang" data-key="title">Good Luck!</title>
     <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
 
     <style type="text/css">
@@ -169,21 +169,48 @@
         }
 
         .flags {
+            height: 56px;
+            display: flex;
             float: right;
+            align-items: center;
+            justify-content: center;
         }
 
         .flag {
-            height: 1em;
             display: inline-block;
-            margin-left: 8px;
+            margin: 0 0 0 6px;
             cursor: pointer;
-            border-radius: 3px;
-            opacity: 0.6;
+            opacity: 0.5;
             transition: opacity 0.5s ease;
         }
 
         .flag.active, .flag:hover {
             opacity: 1;
+        }
+
+        .lang {
+            display: inline-block;
+        }
+
+        .text-animating {
+            animation-name: change;
+            animation-duration: 400ms;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes change {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 0;
+                transform: translateY(-50%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media only screen and (max-width: 510px) {
@@ -209,6 +236,12 @@
                 flex-basis: 30%;
             }
         }
+
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            img[src$=".svg"] {
+                width: 100%;
+            }
+        }
     </style>
 
     <link href="css/button.css" rel="stylesheet">
@@ -223,20 +256,20 @@
     <div class="song-builder">
         <div class="row">
             <h3>
-                Makam
+                <span class="lang" data-key="makam">Makam</span>
                 <div class="flags">
-                    <img class="flag" src="images/tr.svg" data-lang="TR">
-                    <img class="flag active" src="images/gb.svg" data-lang="EN">
+                    <img class="flag" src="images/Turkey.png" data-lang="TR">
+                    <img class="flag active" src="images/United-Kingdom.png" data-lang="EN">
                 </div>
             </h3>
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsM" id="btnHicaz" class="makam" data-value="Hicaz" checked>
-                    <label for="btnHicaz">Hijaz</label>
+                    <label for="btnHicaz"><span class="lang" data-key="hijaz">Hijaz</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsM" id="btnUssak" class="makam" data-value="Ussak">
-                    <label for="btnUssak">Ussak</label>
+                    <label for="btnUssak"><span class="lang" data-key="ussak">Ussak</span></label>
                 </div>
                 <div class="mo-btn inline" style="height: 0;"></div>
                 <div class="mo-btn inline" style="height: 0;"></div>
@@ -244,74 +277,74 @@
         </div>
 
         <div class="row">
-            <h3>Orchestra</h3>
+            <h3 class="lang" data-key="orchestra">Orchestra</h3>
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnUd" class="instrument" data-value="Ud" checked>
-                    <label for="btnUd">Oud</label>
+                    <label for="btnUd"><span class="lang" data-key="oud">Oud</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnKanun" class="instrument" data-value="Kanun" checked>
-                    <label for="btnKanun">Kanun</label>
+                    <label for="btnKanun"><span class="lang" data-key="kanun">Kanun</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnTanbur" class="instrument" data-value="Tanbur" checked>
-                    <label for="btnTanbur">Tanbur</label>
+                    <label for="btnTanbur"><span class="lang" data-key="tanbur">Tanbur</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnNey" class="instrument" data-value="Ney" checked>
-                    <label for="btnNey">Reed</label>
+                    <label for="btnNey"><span class="lang" data-key="reed">Reed</span></label>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <h3>Tempo</h3>
+            <h3 class="lang" data-key="tempo">Tempo</h3>
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsT" id="btn80" class="tempo" data-value="80" checked>
-                    <label for="btn80">80</label>
+                    <label for="btn80"><span class="lang" data-key="eighty">80</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsT" id="btn100" class="tempo" data-value="100">
-                    <label for="btn100">100</label>
+                    <label for="btn100"><span class="lang" data-key="hundred">100</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="radio" name="optionsT" id="btn120" class="tempo" data-value="120">
-                    <label for="btn120">120</label>
+                    <label for="btn120"><span class="lang" data-key="hundredTwenty">120</span></label>
                 </div>
                 <div class="mo-btn inline" style="height: 0;"></div>
             </div>
         </div>
 
         <div class="row">
-            <h3>Percussion</h3>
+            <h3 class="lang" data-key="percussion">Percussion</h3>
             <div class="opts">
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnBendir" class="percussion" data-value="Bendir" checked>
-                    <label for="btnBendir">Bendir</label>
+                    <label for="btnBendir"><span class="lang" data-key="bendir">Bendir</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnErbane" class="percussion" data-value="Erbane" checked>
-                    <label for="btnErbane">Erbane</label>
+                    <label for="btnErbane"><span class="lang" data-key="erbane">Erbane</span></label>
                 </div>
                 <div class="mo-btn inline">
                     <input type="checkbox" id="btnKudum" class="percussion" data-value="Kudum" checked>
-                    <label for="btnKudum">Kudüm</label>
+                    <label for="btnKudum"><span class="lang" data-key="kudum">Kudüm</span></label>
                 </div>
                 <div class="mo-btn inline" style="height: 0;"></div>
             </div>
         </div>
 
         <div class="row">
-            <h3>Musicality <<span id="spnMusicality">3</span>></h3>
+            <h3><span class="lang" data-key="musicality">Musicality</span> <<span id="spnMusicality">3</span>></h3>
             <div class="opts" style="margin: 20px 0;">
                 <input type="range" min="1" max="10" value="3" id="musicality" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
             </div>
         </div>
 
         <div class="last row">
-            <button type="button" id="btnGenerateMusic" class="btn">Compose</button>
+            <button type="button" id="btnGenerateMusic" class="btn"><span class="lang" data-key="compose">Compose</span></button>
         </div>
     </div>
     <div class="song-player" style="display: none;">
@@ -343,7 +376,7 @@
         </div>
 
         <div class="last row">
-            <button type="button" id="btnBackToComposing" class="btn">Back</button>
+            <button type="button" id="btnBackToComposing" class="btn lang" data-key="goBack">Back</button>
         </div>
     </div>
 </div>
@@ -361,6 +394,7 @@
     var musicPlaying = false;
     var tongue = {
         EN: {
+            title: "Good Luck!",
             makam: "Makam",
             hijaz: "Hijaz",
             ussak: "Ussak",
@@ -370,6 +404,9 @@
             tanbur: "Tanbur",
             reed: "Reed",
             tempo: "Tempo",
+            eighty: "80",
+            hundred: "100",
+            hundredTwenty: "120",
             percussion: "Percussion",
             bendir: "Bendir",
             erbane: "Erbane",
@@ -388,6 +425,7 @@
             exSongException: "An unexpected error occurred while composing the song."
         },
         TR: {
+            title: "Rastgele!",
             makam: "Makam",
             hijaz: "Hicaz",
             ussak: "Uşşak",
@@ -397,6 +435,9 @@
             tanbur: "Tanbur",
             reed: "Ney",
             tempo: "Tempo",
+            eighty: "80",
+            hundred: "100",
+            hundredTwenty: "120",
             percussion: "Perküsyon",
             bendir: "Bendir",
             erbane: "Erbane",
@@ -509,6 +550,19 @@
                 currentLang = newLang;
                 $(".flag.active").removeClass("active");
                 $this.addClass("active");
+
+                $(".lang").each(function () {
+                    var $that = $(this);
+                    $that.addClass("text-animating");
+                    setTimeout(function () {
+                        $that.html(tongue[currentLang][$that.attr("data-key")]);
+                    }, 200);
+
+                    setTimeout(function () {
+                        $that.removeClass("text-animating");
+                    }, 420);
+
+                });
             }
         });
 
