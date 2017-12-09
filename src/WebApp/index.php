@@ -25,6 +25,8 @@
             font-weight: normal;
             color: #EEC765;
             background-color: #26292C;
+            -webkit-transition: background-color 0.4s ease-in-out;
+            -o-transition: background-color 0.4s ease-in-out;
             transition: background-color 0.4s ease-in-out;
         }
 
@@ -67,6 +69,7 @@
             margin: -0.7em 0 0;
             background: transparent;
             border: 2px solid #EEC765;
+            -webkit-box-sizing: border-box;
             box-sizing: border-box;
         }
 
@@ -77,8 +80,13 @@
             margin: -0.5em 0 0;
             opacity: 0;
             background: #57726e;
+            -webkit-transform: translate3d(-60px, 0, 0) scale(0.1);
             transform: translate3d(-60px, 0, 0) scale(0.1);
+            -webkit-transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+            transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+            -o-transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
             transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+            transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
         }
 
         .mo-btn input[type="radio"],
@@ -91,20 +99,31 @@
 
         .mo-btn input[type="radio"]:checked + label:after,
         .mo-btn input[type="checkbox"]:checked + label:after {
+            -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
             opacity: 1;
         }
 
         .opts {
             margin-top: 0.2em;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
             flex-direction: row;
+            -ms-flex-wrap: wrap;
             flex-wrap: wrap;
         }
 
         div.inline {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
             flex-grow: 1;
+            -ms-flex-negative: 1;
             flex-shrink: 1;
+            -ms-flex-preferred-size: 5%;
             flex-basis: 5%;
         }
 
@@ -114,25 +133,40 @@
 
         .last.row {
             padding-bottom: 0;
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
             flex-grow: 1;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-align: end;
+            -ms-flex-align: end;
             align-items: flex-end;
         }
 
         .song-builder, .song-player {
+            -webkit-animation-duration: 0.5s;
             animation-duration: 0.5s;
             width: 100%;
             position: relative;
             min-height: calc(100vh - 32px);
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
             flex-direction: column;
         }
 
         .pp-button {
+            -webkit-box-sizing: border-box;
             box-sizing: border-box;
             width: 0;
             height: 144px;
             border-color: transparent transparent transparent #96993d;
+            -webkit-transition: 200ms all ease;
+            -o-transition: 200ms all ease;
             transition: 200ms all ease;
             cursor: pointer;
             border-style: solid;
@@ -170,9 +204,15 @@
 
         .flags {
             height: 56px;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
             float: right;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
         }
 
@@ -182,6 +222,8 @@
             cursor: pointer;
             opacity: 0.4;
             border-radius: 3px;
+            -webkit-transition: opacity 0.5s ease;
+            -o-transition: opacity 0.5s ease;
             transition: opacity 0.5s ease;
         }
 
@@ -194,22 +236,46 @@
         }
 
         .text-animating {
+            -webkit-animation-name: change;
             animation-name: change;
+            -webkit-animation-duration: 400ms;
             animation-duration: 400ms;
+            -webkit-animation-fill-mode: forwards;
             animation-fill-mode: forwards;
+        }
+
+        @-webkit-keyframes change {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 0;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
         }
 
         @keyframes change {
             0% {
                 opacity: 1;
+                -webkit-transform: translateY(0);
                 transform: translateY(0);
             }
             50% {
                 opacity: 0;
+                -webkit-transform: translateY(-50%);
                 transform: translateY(-50%);
             }
             100% {
                 opacity: 1;
+                -webkit-transform: translateY(0);
                 transform: translateY(0);
             }
         }
@@ -232,15 +298,13 @@
 
         @media only screen and (max-width: 450px) {
             div.inline {
+                -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
                 flex-grow: 1;
+                -ms-flex-negative: 1;
                 flex-shrink: 1;
+                -ms-flex-preferred-size: 30%;
                 flex-basis: 30%;
-            }
-        }
-
-        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-            img[src$=".svg"] {
-                width: 100%;
             }
         }
     </style>
